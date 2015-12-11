@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
  */
 public class MainActivity extends Activity implements View.OnClickListener{
 
-    MediaPlayer anthemSong;
+    MediaPlayer mySong;
 
     Button btnAnthem, btnMangal, btnDiwali, btnFolk, btnStop, btnMute;
 
@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnAnthem.setPadding(5, 5, 5, 5);
         mainLayout.addView(btnAnthem);
 
-        btnAnthem.setOnClickListener(this);
+        btnAnthem.setOnClickListener(anthemListener);
 
         btnMangal = new Button(this);
         btnMangal.setBackgroundColor(Color.BLUE);
@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnMangal.setPadding(5, 5, 5, 5);
         mainLayout.addView(btnMangal);
 
-        btnMangal.setOnClickListener(this);
+        btnMangal.setOnClickListener(mangalListener);
 
         btnDiwali = new Button(this);
         btnDiwali.setBackgroundColor(Color.BLUE);
@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnDiwali.setPadding(5, 5, 5, 5);
         mainLayout.addView(btnDiwali);
 
-        btnDiwali.setOnClickListener(this);
+        btnDiwali.setOnClickListener(deepawaliListener);
 
         btnFolk = new Button(this);
         btnFolk.setBackgroundColor(Color.BLUE);
@@ -67,34 +67,34 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnFolk.setPadding(5, 5, 5, 5);
         mainLayout.addView(btnFolk);
 
-        btnFolk.setOnClickListener(this);
+        btnFolk.setOnClickListener(folkListener);
 
-        /*LinearLayout controlLayout = new LinearLayout(this);
+        LinearLayout controlLayout = new LinearLayout(this);
         controlLayout.setOrientation(LinearLayout.HORIZONTAL);
         mainLayout.setGravity(Gravity.CENTER);
         mainLayout.addView(controlLayout);
 
         btnStop = new Button(this);
         btnStop.setBackgroundColor(Color.LTGRAY);
-        btnStop.setLayoutParams(new LinearLayout.LayoutParams(10, 500));
+        //btnStop.setLayoutParams(new LinearLayout.LayoutParams(10, 500));
         btnStop.setText("STOP");
         btnStop.setTextSize(20);
         btnStop.setTypeface(null, Typeface.BOLD);
         btnStop.setPadding(5, 5, 5, 5);
         controlLayout.addView(btnStop);
 
-        btnStop.setOnClickListener(this);
+        btnStop.setOnClickListener(stopListener);
 
         btnMute = new Button(this);
         btnMute.setBackgroundColor(Color.LTGRAY);
-        btnMute.setLayoutParams(new LinearLayout.LayoutParams(10, 500));
+        //btnMute.setLayoutParams(new LinearLayout.LayoutParams(10, 500));
         btnMute.setText("MUTE");
         btnMute.setTextSize(20);
         btnMute.setTypeface(null, Typeface.BOLD);
         btnMute.setPadding(5, 5, 5, 5);
         controlLayout.addView(btnMute);
 
-        btnMute.setOnClickListener(this);*/
+        btnMute.setOnClickListener(muteListener);
 
         setContentView(mainLayout);
     }
@@ -102,18 +102,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        Log.e("onClick", "Started");
+        /*Log.e("onClick", "Started");
 
         Button b = (Button)v;
         String buttontext = b.getText().toString();
 
         Log.e("ButtonText", ""+buttontext);
 
-        if(anthemSong == null)
-            anthemSong = MediaPlayer.create(getApplicationContext(), R.raw.national_anthem);
+        if(mySong == null)
+            mySong = MediaPlayer.create(getApplicationContext(), R.raw.national_anthem);
 
-        anthemSong.setOnPreparedListener(songPListener);
-        anthemSong.setOnCompletionListener(songCListener);
+        mySong.setOnPreparedListener(songPListener);
+        mySong.setOnCompletionListener(songCListener);*/
 
     }
 
@@ -139,17 +139,105 @@ public class MainActivity extends Activity implements View.OnClickListener{
     {
         Log.e("playSong", "Started");
 
-        if (anthemSong.isPlaying())
+        if (mySong.isPlaying())
         {
-            anthemSong.stop();
-            anthemSong.release();
+            mySong.stop();
+            mySong.release();
             Log.e("playSong", "Stopped");
         }
-        if(anthemSong.getCurrentPosition() != 1)
+        if(mySong.getCurrentPosition() != 1)
         {
-            anthemSong.seekTo(1);
+            mySong.seekTo(1);
             Log.e("playSong", "Seek");
         }
-        anthemSong.start();
+        mySong.start();
     }
+
+    public View.OnClickListener anthemListener = new View.OnClickListener()
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            mySong = null;
+
+            if(mySong == null)
+                mySong = MediaPlayer.create(getApplicationContext(), R.raw.national_anthem);
+
+            mySong.setOnPreparedListener(songPListener);
+            mySong.setOnCompletionListener(songCListener);
+
+        }
+    };
+
+    public View.OnClickListener mangalListener = new View.OnClickListener()
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            mySong = null;
+
+            if(mySong == null)
+                mySong = MediaPlayer.create(getApplicationContext(), R.raw.mangal_dhun);
+
+            mySong.setOnPreparedListener(songPListener);
+            mySong.setOnCompletionListener(songCListener);
+
+        }
+    };
+
+    public View.OnClickListener deepawaliListener = new View.OnClickListener()
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            mySong = null;
+
+            if(mySong == null)
+                mySong = MediaPlayer.create(getApplicationContext(), R.raw.deepawali_dhun);
+
+            mySong.setOnPreparedListener(songPListener);
+            mySong.setOnCompletionListener(songCListener);
+
+        }
+    };
+
+    public View.OnClickListener folkListener = new View.OnClickListener()
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            mySong = null;
+
+            if(mySong == null)
+                mySong = MediaPlayer.create(getApplicationContext(), R.raw.resham_firiri);
+
+            mySong.setOnPreparedListener(songPListener);
+            mySong.setOnCompletionListener(songCListener);
+
+        }
+    };
+
+    public View.OnClickListener stopListener = new View.OnClickListener()
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+
+        }
+    };
+
+    public View.OnClickListener muteListener = new View.OnClickListener()
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+
+        }
+    };
 }
